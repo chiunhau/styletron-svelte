@@ -2,11 +2,8 @@ import * as Elements from 'svelte-elements';
 import { Client } from 'styletron-engine-atomic';
 
 const styletronClient = new Client();
-const renderStyle = (style) => styletronClient.renderStyle(style);
 
-function capital(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+export const css = (style) => styletronClient.renderStyle(style);
 
 export const styled = (tag, style) =>
   class extends Elements[capital(tag)] {
@@ -17,11 +14,12 @@ export const styled = (tag, style) =>
         ...restOptions,
         props: {
           ...props,
-          class:
-            typeof style === 'function'
-              ? renderStyle(style(props))
-              : renderStyle(style),
+          class: typeof style === 'function' ? css(style(props)) : css(style),
         },
       });
     }
   };
+
+function capital(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
