@@ -1,4 +1,4 @@
-This is an experimental Svelte bindings for Styletron.
+This is an experimental [Svelte](https://svelte.dev/) bindings for [Styletron](https://github.com/styletron/styletron).
 
 ## Get started
 
@@ -9,7 +9,7 @@ $ yarn add styletron-svelte
 ```svelte
 // App.svelte
 <script>
-  import { styled } from 'styletron-svelte';
+  import { styled, css } from 'styletron-svelte';
 
   // Create a styled component by passing an element name and a style object
   const Heading = styled('h1', {
@@ -22,11 +22,15 @@ $ yarn add styletron-svelte
     height: $size
   }));
 
+  // Do you need generated CSS classes only?
+  const classNames = css({color: 'green'});
+
 </script>
 
 <main>
   <Heading>Hello World</Heading>
   <Square $size="100px"/>
+  <p class="{classNames}">I will be green</p>
 </main>
 ```
 
